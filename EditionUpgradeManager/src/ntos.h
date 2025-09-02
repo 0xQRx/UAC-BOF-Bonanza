@@ -105,11 +105,13 @@ extern "C" {
     typedef struct _IO_TIMER* PIO_TIMER;
     typedef LARGE_INTEGER PHYSICAL_ADDRESS;
 
-#ifndef _WIN32_WINNT_WIN10
-#define _WIN32_WINNT_WIN10 0x0A00
-#endif
-#if (_WIN32_WINNT < _WIN32_WINNT_WIN10)
-    typedef PVOID PMEM_EXTENDED_PARAMETER;
+#ifndef _PROCESSOR_NUMBER_DEFINED
+#define _PROCESSOR_NUMBER_DEFINED
+typedef struct _PROCESSOR_NUMBER {
+    WORD Group;
+    BYTE Number;
+    BYTE Reserved;
+} PROCESSOR_NUMBER, *PPROCESSOR_NUMBER;
 #endif
 
 #ifndef IN_REGION
@@ -11470,7 +11472,7 @@ extern "C" {
         NtSetEaFile(
             _In_ HANDLE FileHandle,
             _Out_ PIO_STATUS_BLOCK IoStatusBlock,
-            _In_bytecount_(Length) PVOID Buffer,
+             PVOID Buffer,
             _In_ ULONG Length);
 
     NTSYSAPI

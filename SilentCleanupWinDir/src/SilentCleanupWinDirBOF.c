@@ -290,9 +290,11 @@ int go(char * args, unsigned long length) {
     // Set this sleep to be for however long the EXE will execute for. 30 seconds is a good standard for use with something like Shhhloader.
     KERNEL32$Sleep(30000);
 
+    int result;
+    
     FileCleanup:
     // delete exe from created directory
-    int result = KERNEL32$DeleteFileA(targetBinLocation);
+    result = KERNEL32$DeleteFileA(targetBinLocation);
     if (result != 0) {
         BeaconPrintf(CALLBACK_OUTPUT, "File deleted succesfully: %s\n", targetBinLocation);
     }
